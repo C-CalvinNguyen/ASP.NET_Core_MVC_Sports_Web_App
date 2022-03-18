@@ -1,0 +1,60 @@
+﻿@model Product
+<h3>@ViewBag.Action Product</h3>
+
+@if (ViewBag.Action == "Add")
+{
+<form asp-action="Edit" asp-controller="Product" method="post">
+    <input type="hidden" value="0" asp-for="productId" />
+    <label for="productCode">Code</label>
+    <br />
+    <input type="text" id="productCode" name="productCode" asp-for="productCode" />
+    <span asp-validation-for="productCode" class="text-danger"></span>
+    <br />
+    <label for="productName">Name</label>
+    <br />
+    <input type="text" id="productName" name="productName" asp-for="productName" />
+    <span asp-validation-for="productName" class="text-danger"></span>
+    <br />
+    <label for="productPrice">Yearly Price</label>
+    <br />
+    <input type="text" id="productPrice" name="productPrice" asp-for="productPrice" />
+    <span asp-validation-for="productPrice" class="text-danger"></span>
+    <br />
+    <label for="productReleaseDate">Release Date</label>
+    <br />
+    <input type="text" id="productReleaseDate" name="productReleaseDate" value="@DateTime.Now" asp-for="productReleaseDate" />
+    <span asp-validation-for="productReleaseDate" class="text-danger"></span>
+    <br /><br />
+    <input class="btn btn-primary" type="submit" value="Save" />
+    <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("List", "Product")'">Cancel</button>
+</form>
+}
+@if (ViewBag.Action == "Edit")
+{
+<form asp-action="Edit" asp-controller="Product" method="post">
+    <input type="hidden" value="@Model.productId" asp-for="productId" />
+    <label for="productCode">Code</label>
+    <br />
+    <input type="text" id="productCode" name="productCode" value="@Model.productCode" asp-for="productCode" />
+    <span asp-validation-for="productCode" class="text-danger"></span>
+    <br />
+    <label for="productName">Name</label>
+    <br />
+    <input type="text" id="productName" name="productName" value="@Model.productName" asp-for="productName" />
+    <span asp-validation-for="productName" class="text-danger"></span>
+    <br />
+    <label for="productPrice">Yearly Price</label>
+    <br />
+    <input type="text" id="productPrice" name="productPrice" value="@Model.productPrice" asp-for="productPrice" />
+    <span asp-validation-for="productPrice" class="text-danger"></span>
+    <br />
+    <label for="productReleaseDate">Release Date</label>
+    <br />
+    <input type="text" id="productReleaseDate" name="productReleaseDate" value="@Model.productReleaseDate" asp-for="productReleaseDate" />
+    <span asp-validation-for="productReleaseDate" class="text-danger"></span>
+    <br />
+    <br />
+    <input class="btn btn-primary" type="submit" value="Save" />
+    <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("List", "Product")'">Cancel</button>
+</form>
+}

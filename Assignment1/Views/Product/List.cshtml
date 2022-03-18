@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Product Manager";
+}
+
+@{ 
+    if (TempData.ContainsKey("message"))
+    {
+        <p>@TempData["message"]</p>
+    }
+}
+
+<h3>Product Manager</h3>
+<table class="table table-striped">
+
+    <thead>
+        <tr class="danger">
+            <th class="th">Code</th>
+            <th class="th">Name</th>
+            <th class="th">Price</th>
+            <th class="th">Release Date</th>
+
+        </tr>
+    </thead>
+    @foreach (Product product in Model)
+    {
+        <tr>
+            <td>@product.productCode</td>
+            <td>@product.productName</td>
+            <td>$@product.productPrice</td>
+            <td>@product.productReleaseDate</td>
+            <td>
+                <form>
+                    <button class="btn btn-primary" type="submit"asp-action="Edit" asp-controller="Product" asp-route-id="@product.productId">Edit</button>
+                </form>
+            </td>
+            <td>
+                <form>
+                    <button class="btn btn-primary" type="submit" asp-action="Delete" asp-controller="Product" asp-route-id="@product.productId">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    
+</table>
+<form>
+    <button class="btn btn-primary" type="submit" asp-action="Add" asp-controller="Product">Add Product</button>
+</form>

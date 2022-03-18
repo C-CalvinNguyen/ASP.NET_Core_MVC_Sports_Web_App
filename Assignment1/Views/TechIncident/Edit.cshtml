@@ -1,0 +1,56 @@
+﻿@model IncidentEditViewModel
+<h3>@Model.currAction Incident</h3>
+
+@if (Model.currAction == "Edit")
+{
+    <form asp-action="Edit" asp-controller="TechIncident" method="post">
+        <input type="hidden" value="@Model.currIncident.incidentId" asp-for="currIncident.incidentId" />
+        <label for="currIncident.incidentCustomerId">Customer</label>
+        <br />
+
+        <input disabled type="text" value="@Model.currIncident.incidentCustomer.customerFullName"/>
+        <input type="hidden" value="@Model.currIncident.incidentCustomerId" id="currIncident.incidentCustomerId" name="currIncident.incidentCustomerId" asp-for="currIncident.incidentCustomerId"/>
+        <span asp-validation-for="currIncident.incidentCustomerId" class="text-danger"></span>
+
+        <br />
+        <label for="currIncident.incidentProductId">Product</label>
+        <br />
+
+        <input disabled type="text" value="@Model.currIncident.incidentProduct.productName"/>
+        <input type="hidden" value="@Model.currIncident.incidentProductId" id="currIncident.incidentProductId" name="currIncident.incidentProductId" asp-for="currIncident.incidentProductId"/>
+        <span asp-validation-for="currIncident.incidentProductId" class="text-danger"></span>
+
+        <br />
+        <label for="currIncident.incidentTitle">Title</label>
+        <br />
+
+        <input disabled type="text" value="@Model.currIncident.incidentTitle"/>
+        <input type="hidden" id="currIncident.incidentTitle" name="currIncident.incidentTitle" asp-for="currIncident.incidentTitle" value="@Model.currIncident.incidentTitle" />
+        <span asp-validation-for="currIncident.incidentTitle" class="text-danger"></span>
+
+        <br />
+        <label for="currIncident.incidentDescription">Description</label>
+        <br />
+        <input type="text" id="currIncident.incidentDescription" name="currIncident.incidentDescription" asp-for="currIncident.incidentDescription" value="@Model.currIncident.incidentDescription" />
+        <span asp-validation-for="currIncident.incidentDescription" class="text-danger"></span>
+
+        <br />
+        <label for="currIncident.incidentTechnicianId">Technician</label>
+        <br />
+
+        <input disabled type="text" value="@Model.currIncident.incidentTechnician.technicianFullName"/>
+        <input type="hidden" value="@Model.currIncident.incidentTechnicianId" id="currIncident.incidentTechnicianId" name="currIncident.incidentTechnicianId" asp-for="currIncident.incidentTechnicianId"/>
+
+        <input type="hidden" id="currIncident.incidentDateOpened" name="currIncident.incidentDateOpened" value="@Model.currIncident.incidentDateOpened" asp-for="currIncident.incidentDateOpened" />
+        
+        <br />
+        <label for="currIncident.incidentDateClosed">Date Closed</label>
+        <br />
+        <input type="text" id="currIncident.incidentDateClosed" name="currIncident.incidentDateClosed" value="@Model.currIncident.incidentDateClosed" asp-for="currIncident.incidentDateClosed" />
+        <span asp-validation-for="currIncident.incidentDateClosed" class="text-danger"></span>
+
+        <br /><br />
+        <input class="btn btn-primary" type="submit" value="Save" />
+        <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("List", "TechIncident", new { id = ViewBag.session})'">Cancel</button>
+    </form>
+}

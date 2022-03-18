@@ -1,0 +1,22 @@
+﻿@model Product
+<h3>Delete Product</h3>
+
+<p>
+    Product Code: @Model.productCode
+    <br />
+    Product Name: @Model.productName
+    <br />
+    Product Price: @Model.productPrice
+    <br />
+    Release Date: @Model.productReleaseDate
+</p>
+<p>Are you sure you want to delete this product?</p>
+<form asp-action="Delete" asp-controller="Product" method="post">
+    <input type="hidden" value="@Model.productId" asp-for="productId" />
+    <input type="hidden" id="productCode" name="productCode" value="@Model.productCode" asp-for="productCode" />
+    <input type="hidden" id="productName" name="productName" value="@Model.productName" asp-for="productName" />
+    <input type="hidden" id="productPrice" name="productPrice" value="@Model.productPrice" asp-for="productPrice" />
+    <input type="hidden" id="productReleaseDate" name="productReleaseDate" value="@Model.productReleaseDate" asp-for="productReleaseDate" />
+    <input class="btn btn-primary" type="submit" value="Delete" />
+    <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("List", "Product")'">Cancel</button>
+</form>

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Registration>
+
+@foreach (Customer cust in ViewBag.customer)
+{
+    <h3>Customer: @cust.customerFullName</h3>
+    <h3>Registrations</h3>
+}
+
+@if (Model.Count() == 0)
+{
+    <p>Customer has zero product registrations</p>
+}
+
+<table class="table table-striped">
+
+    <thead>
+        <tr class="danger">
+            <th class="th">Name</th>
+        </tr>
+    </thead>
+    @foreach (Registration registration in Model)
+    {
+        @foreach (Product product in ViewBag.products)
+        {
+            @if (product.productId == registration.productId)
+            {
+                <tr>
+                    <td>@product.productName</td>
+                    <td>
+                        <form method="post">
+                            <button name="productId" class="btn btn-primary" type="submit" asp-action="Delete" asp-controller="Registration" value="@product.productId">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    }
+</table>
+<h3>Product</h3>
+<form asp-action="Add" asp-controller="Registration" method="post">
+    <select name="productId">
+        @foreach (Product product in ViewBag.products)
+        {
+            <option value="@product.productId">@product.productName</option>
+        }
+    </select>
+    <br />
+    <input class="btn btn-primary" type="submit" value="Register" />
+</form>

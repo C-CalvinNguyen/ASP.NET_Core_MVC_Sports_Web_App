@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Technician>
+@{
+    ViewData["Title"] = "Technician Manager";
+}
+
+@{
+    if (TempData.ContainsKey("message"))
+    {
+        <p>@TempData["message"]</p>
+    }
+}
+
+<h3>Technician Manager</h3>
+<table class="table table-striped">
+
+    <thead>
+        <tr class="danger">
+            <th class="th">Name</th>
+            <th class="th">Email</th>
+            <th class="th">Phone</th>
+        </tr>
+    </thead>
+    @foreach (Technician technician in Model)
+    {
+        <tr>
+            <td>@technician.technicianFullName</td>
+            <td>@technician.technicianEmail</td>
+            <td>@technician.technicianPhone</td>
+            <td>
+                <form>
+                    <button class="btn btn-primary" type="submit" asp-action="Edit" asp-controller="Technician" asp-route-id="@technician.technicianId">Edit</button>
+                </form>
+            </td>
+            <td>
+                <form>
+                    <button class="btn btn-primary" type="submit" asp-action="Delete" asp-controller="Technician" asp-route-id="@technician.technicianId">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+<form>
+    <button class="btn btn-primary" type="submit" asp-action="Add" asp-controller="Technician">Add Technician</button>
+</form>

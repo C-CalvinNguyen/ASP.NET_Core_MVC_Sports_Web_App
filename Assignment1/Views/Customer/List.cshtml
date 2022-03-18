@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Customer>
+@{
+    ViewData["Title"] = "Customer Manager";
+}
+
+@{
+    if (TempData.ContainsKey("message"))
+    {
+        <p>@TempData["message"]</p>
+    }
+}
+
+<h3>Customer Manager</h3>
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th class="th">Name</th>
+            <th class="th">Email</th>
+            <th class="th">City</th>
+        </tr>
+    </thead>
+    @foreach (Customer customer in Model)
+    {
+        <tr>
+            <td>@(customer.customerFirstName + " " + customer.customerLastName)</td>
+            <td>@customer.customerEmail</td>
+            <td>@customer.customerCity</td>
+            <td>
+                <form>
+                    <button class="btn btn-primary" type="submit" asp-action="Edit" asp-controller="Customer" asp-route-id="@customer.customerId">Edit</button>
+                </form>
+            </td>
+            <td>
+                <form>
+                    <button class="btn btn-primary" type="submit" asp-action="Delete" asp-controller="Customer" asp-route-id="@customer.customerId">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+<form>
+    <button class="btn btn-primary" type="submit" asp-action="Add" asp-controller="Customer">Add Customer</button>
+</form>

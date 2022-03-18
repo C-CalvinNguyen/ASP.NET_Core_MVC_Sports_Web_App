@@ -1,0 +1,28 @@
+﻿@model Customer
+<h3>Delete Customer</h3>
+
+<p>
+    Customer Name: @Model.customerFirstName , @Model.customerLastName
+    <br />
+    Customer Address: @Model.customerAddress, @Model.customerCity, @Model.customerState, @Model.customerPostalCode
+    <br />
+    Customer Email: @Model.customerEmail
+    <br />
+    Customerr Phone: @Model.customerPhone
+</p>
+<p>Are you sure you want to delete this customer?</p>
+<form asp-action="Delete" asp-controller="Customer" method="post">
+    <input type="hidden" id="customerId" name="customerId" asp-for="customerId" value="@Model.customerId" />
+    <input type="hidden" id="customerFirstName" name="customerFirstName" asp-for="@Model.customerFirstName" />
+    <input type="hidden" id="customerLastName" name="customerLastName" asp-for="@Model.customerLastName" />
+    <input type="hidden" id="customerAddress" name="customerAddress" asp-for="@Model.customerAddress" />
+    <input type="hidden" id="customerCity" name="customerCity" asp-for="@Model.customerCity" />
+    <input type="hidden" id="customerState" name="customerState" asp-for="@Model.customerState" />
+    <input type="hidden" id="customerPostalCode" name="customerPostalCode" asp-for="@Model.customerPostalCode" />
+    <input type="hidden" id="customerCountry" name="customerCountry" asp-for="@Model.customerCountry" />
+    <input type="hidden" id="customerEmail" name="customerEmail" asp-for="@Model.customerEmail" />
+    <input type="hidden" id="customerPhone" name="customerPhone" asp-for="@Model.customerPhone" />
+    <input class="btn btn-primary"type="submit" value="Delete" />
+    <button class="btn btn-primary"type="button" onclick="location.href='@Url.Action("List", "Customer")'">Cancel</button>
+</form>
+

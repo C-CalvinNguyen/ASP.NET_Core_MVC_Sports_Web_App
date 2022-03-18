@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Technician>
+
+<h3>Technician</h3>
+
+@if (ViewBag.message == "true")
+{
+    <p>Please select a technician</p>
+}
+
+<form asp-action="List" asp-controller="TechIncident" method="get">
+    <select name="id">
+        @foreach(Technician tech in Model)
+        {
+            <option value="@tech.technicianId">@tech.technicianFullName</option>
+        }
+        <option selected="selected" value="-1">Select a technician...</option>
+    </select>
+    <br />
+    <input class="btn btn-primary" type="submit" value="Select" />
+</form>

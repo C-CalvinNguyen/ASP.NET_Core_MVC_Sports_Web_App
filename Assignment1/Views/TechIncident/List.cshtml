@@ -1,0 +1,56 @@
+﻿@model IncidentListViewModel 
+
+@foreach(Technician tech in ViewBag.Technician)
+{
+    <h3>Technician: @tech.technicianFullName</h3>
+    <h3>Assigned/Open Incidents</h3>
+}
+
+@if(@Model.incidents.Count == 0)
+{
+    <p>Please select another technician</p>
+}
+
+
+<table class="table table-striped">
+
+<thead>
+    <tr class="danger">
+        <th class="th">Title</th>
+        <th class="th">Customer</th>
+        <th class="th">Product</th>
+        <th class="th">Date Opened</th>
+
+    </tr>
+</thead>
+@foreach (Incident incident in Model.incidents)
+{
+    <tr>
+        <td>@incident.incidentTitle</td>
+        @foreach (Customer customer in ViewBag.Customer)
+        {
+            if (@customer.customerId == @incident.incidentCustomerId)
+            {
+                <td>@customer.customerFirstName @customer.customerLastName</td>
+            }
+        }
+        @foreach (Product product in ViewBag.Product)
+        {
+            if (@product.productId == @incident.incidentProductId)
+            {
+                <td>@product.productName</td>
+            }
+        }
+        <td>@incident.incidentDateOpened</td>
+        <td>
+            <form>
+                <button class="btn btn-primary" type="submit" asp-action="Edit" asp-controller="TechIncident" asp-route-id="@incident.incidentId">Edit</button>
+            </form>
+        </td>
+    </tr>
+}
+
+</table>
+<form>
+    <button class="btn btn-primary" type="submit" asp-action="Get" asp-controller="TechIncident">Switch Technician</button>
+</form>

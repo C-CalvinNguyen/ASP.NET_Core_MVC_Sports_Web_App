@@ -1,0 +1,67 @@
+﻿@model IncidentListViewModel
+@{
+    ViewData["Title"] = "Incident Manager";
+}
+
+@{
+    if (TempData.ContainsKey("message"))
+    {
+        <p>@TempData["message"]</p>
+    }
+}
+
+<h3>Incident Manager</h3>
+
+<!-- 
+    Anchor tags used for filtering, calls Incident controller & List Action, gives a value to the string filter argument using asp-route-filter
+-->
+<a asp-action="List" asp-controller="Incident" asp-route-filter="all">All Incidents</a>
+<a asp-action="List" asp-controller="Incident" asp-route-filter="unassigned">Unassigned Incidents</a>
+<a asp-action="List" asp-controller="Incident" asp-route-filter="open">Open Incidents</a>
+<table class="table table-striped">
+
+    <thead>
+        <tr class="danger">
+            <th class="th">Title</th>
+            <th class="th">Customer</th>
+            <th class="th">Product</th>
+            <th class="th">Date Opened</th>
+
+        </tr>
+    </thead>
+    @foreach (Incident incident in Model.incidents)
+    {
+        <tr>
+            <td>@incident.incidentTitle</td>
+            @foreach (Customer customer in ViewBag.Customer)
+            {
+                if (@customer.customerId == @incident.incidentCustomerId)
+                {
+                    <td>@customer.customerFirstName @customer.customerLastName</td>
+                }
+            }
+            @foreach (Product product in ViewBag.Product)
+            {
+                if (@product.productId == @incident.incidentProductId)
+                {
+                    <td>@product.productName</td>
+                }
+            }
+            <td>@incident.incidentDateOpened</td>
+            <td>
+                <form>
+                    <button class="btn btn-primary" type="submit" asp-action="Edit" asp-controller="Incident" asp-route-id="@incident.incidentId">Edit</button>
+                </form>
+            </td>
+            <td>
+                <form>
+                    <button class="btn btn-primary" type="submit" asp-action="Delete" asp-controller="Incident" asp-route-id="@incident.incidentId">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+
+</table>
+<form>
+    <button class="btn btn-primary" type="submit" asp-action="Add" asp-controller="Incident">Add Incident</button>
+</form>

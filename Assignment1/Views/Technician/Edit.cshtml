@@ -1,0 +1,50 @@
+﻿@model Technician
+<h3>@ViewBag.Action Technician</h3>
+
+@if (ViewBag.Action == "Add")
+{
+<form asp-action="Edit" asp-controller="Technician" method="post">
+    <input type="hidden" value="0" asp-for="technicianId" />
+    <label for="technnicianFullName">Name</label>
+    <br />
+    <input type="text" id="technicianFullName" name="technicianFullName" asp-for="technicianFullName" />
+    <span asp-validation-for="technicianFullName" class="text-danger"></span>
+    <br />
+    <label for="technicianEmail">Email</label>
+    <br />
+    <input type="text" id="technicianEmail" name="technicianEmail" asp-for="technicianEmail" />
+    <span asp-validation-for="technicianEmail" class="text-danger"></span>
+    <br />
+    <label for="technicianPhone">Phone</label>
+    <br />
+    <input type="text" id="technicianPhone" name="technicianPhone" asp-for="technicianPhone" />
+    <span asp-validation-for="technicianPhone" class="text-danger"></span>
+    <br /><br />
+    <button class="btn btn-primary" type="submit">Save</button>
+    <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("List", "Technician")'">Cancel</button>
+</form>
+}
+@if (ViewBag.Action == "Edit")
+{
+<form asp-action="Edit" asp-controller="Technician" method="post">
+    <input type="hidden" value="@Model.technicianId" asp-for="technicianId" />
+    <label for="technicianFullName">Name</label>
+    <br />
+    <input type="text" id="technicianFullName" name="technicianFullName" value="@Model.technicianFullName" asp-for="technicianFullName" />
+    <span asp-validation-for="technicianFullName" class="text-danger"></span>
+    <br />
+    <label for="technicianEmail">Email</label>
+    <br />
+    <input type="text" id="technicianEmail" name="technicianEmail" value="@Model.technicianEmail" asp-for="technicianEmail" />
+    <span asp-validation-for="technicianEmail" class="text-danger"></span>
+    <br />
+    <label for="technicianPhone">Phone</label>
+    <br />
+    <input type="text" id="technicianPhone" name="technicianPhone" value="@Model.technicianPhone" asp-for="technicianPhone" />
+    <span asp-validation-for="technicianPhone" class="text-danger"></span>
+    <br />
+    <br />
+    <button class="btn btn-primary" type="submit">Save</button>
+    <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("List", "Technician")'">Cancel</button>
+</form>
+}
